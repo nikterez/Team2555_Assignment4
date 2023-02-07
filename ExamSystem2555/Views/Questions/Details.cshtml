@@ -9,11 +9,10 @@
 
 <div class="center"><h2>Question Details</h2></div>
 
-<table class="table table-hover width=30% table-light" style = "text-align: center">
-    <tr>
-        <th>Display</th>
-        <td>@Html.Raw(Model.QuestionDisplay)</td>
-    </tr>
+        <div class="container" id="fixed-size">@Html.Raw(Model.QuestionDisplay)</div>
+<table class="table table-hover table-light" style = "text-align: center;">
+   
+    
     <tr>
         <th>Difficulty</th>
         <td>@Model.QuestionDifficulty</td>
@@ -62,3 +61,25 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+<script>
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var td = document.getElementById(`fixed-size`);
+            var img = td.querySelector("img");
+            td.style.width = "150%";
+            td.style.height = "200px";
+            td.style.overflow = "hidden";
+            td.style.display = "flex";
+            td.style.justifyContent = "center";
+            if (img) {
+                img.style.width = "300%";
+                img.style.height = "100%";
+                img.style.objectFit = "cover";
+            }
+          
+        });
+
+</script>

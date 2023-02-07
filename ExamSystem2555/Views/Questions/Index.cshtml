@@ -7,53 +7,92 @@
 <h1>Welcome</h1>
 @if (User.IsInRole("Administrator"))
 {
-<p>
-    <a type="button" class="btn btn-primary btn-lg" asp-action="Create">Add New Question</a>
-</p>
-    
+    <p>
+        <a type="button" class="btn btn-primary btn-lg" asp-action="Create">Add New Question</a>
+    </p>
+
 }
 
-<table class="table table-hover width=80% table-light" style = "text-align: center">
+<table class="table table-hover table-light" style=" text-align: center">
     <thead class="table-primary">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Display)
             </th>
-            @if (User.IsInRole("Administrator")){<th>Edit Actions</th>}
+            @if (User.IsInRole("Administrator"))
+            {
+                <th>Edit Actions</th>
+            }
             <th>Details</th>
-            @if (User.IsInRole("Administrator")){<th>Delete</th>}
-            
+            @if (User.IsInRole("Administrator"))
+            {
+                <th>Delete</th>
+            }
+
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
+        @{
+            var i = 0;
+
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <td>
-                    @Html.Raw(item.Display)
+                    <td id="fixed-size-@i">
+                        @Html.Raw(item.Display)
                     </td>
-                @if (User.IsInRole("Administrator"))
-                {
+
+                    @if (User.IsInRole("Administrator"))
+                    {
+
+                        <td>
+                            <a class="btn btn-link" asp-action="Edit" asp-route-id="@item.QuestionId">Edit Display</a> |
+                            <a class="btn btn-link" asp-action="EditAnswersIndex" asp-route-id="@item.QuestionId">Edit Answers</a> |
+                            <a class="btn btn-link" asp-action="EditQuestionTopicsIndex" asp-route-id="@item.QuestionId">Edit Topics</a> |
+                            <a class="btn btn-link" asp-action="EditQuestionCertificatesIndex" asp-route-id="@item.QuestionId">Edit Certificate</a>
+                        </td>
+                    }
+                    <td>
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.QuestionId">Details</a>
+                    </td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+
+                        <td>
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.QuestionId">Delete</a>
+                        </td>
+                    }
                     
-                    <td >
-                        <a class="btn btn-link" asp-action="Edit" asp-route-id="@item.QuestionId">Edit Display</a> |
-                        <a class="btn btn-link" asp-action="EditAnswersIndex" asp-route-id="@item.QuestionId">Edit Answers</a> |
-                        <a class="btn btn-link" asp-action="EditQuestionTopicsIndex" asp-route-id="@item.QuestionId">Edit Topics</a> |
-                        <a class="btn btn-link" asp-action="EditQuestionCertificatesIndex" asp-route-id="@item.QuestionId">Edit Certificate</a>
-                    </td>
-                }
-                    <td>
-                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.QuestionId">Details</a>
-                </td>
-                @if (User.IsInRole("Administrator"))
-                {
-                    
-                    <td>
-                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.QuestionId">Delete</a>
-                    </td>
-                }
                 </tr>
+                i++;
+            }
+
+
         }
+
     </tbody>
 </table>
+
+
+
+<script>
+    
+
+        document.addEventListener("DOMContentLoaded", function () {
+          for (var j = 0; j < @Model.Count(); j++) {    
+            var td = document.getElementById(`fixed-size-${j}`);
+            var img = td.querySelector("img");
+            td.style.width = "100px";
+            td.style.height = "100px";
+            td.style.overflow = "hidden";
+            if (img) {
+                img.style.width = "100%";
+                img.style.height = "100%";
+                img.style.objectFit = "cover";
+            }
+          }
+        });
+    
+</script>
+
