@@ -10,14 +10,14 @@
         <th>Certficate Title</th>
         <td>@Model.CertificateTitle</td>
     </tr>
-    <tr>
-        <th>Questions</th>
-        
-            @foreach (var question in Model.Questions)
-            {
-                <td>@question.QuestionDisplay</td>
-            }
-        
+    <tr>        
+            <th>Questions</th>
+            <td> 
+                @foreach (var question in Model.Questions)
+                {
+                    @question.QuestionDisplay
+                }
+            </td>
     </tr>
 </table>
 

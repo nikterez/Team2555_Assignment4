@@ -9,11 +9,25 @@
 
 <div class="center"><h2>Question Details</h2></div>
 
-<table class="table table-hover width=30% table-light" style = "text-align: center">
+<table class="table table-hover table-light">
+    <tbody>
     <tr>
-        <th>Display</th>
-        <td>@Html.Raw(Model.QuestionDisplay)</td>
+        <td colspan="2">@Html.Raw(Model.QuestionDisplay)</td>
+        
     </tr>
+    @foreach (var answer in Model.Answers)
+    {
+      <tr>
+         <th>Answer</th>
+            <td>@Html.Raw(answer.PossibleAnswer)
+                @if (answer.IsCorrect)
+                {
+                    <h6>(Correct Answer)</h6>
+                }
+                    
+            </td>
+      </tr>
+    }
     <tr>
         <th>Difficulty</th>
         <td>@Model.QuestionDifficulty</td>
@@ -43,20 +57,9 @@
             }
         </td>
     </tr>
-    <tr>
-        <th><br><br>Answers</th>
-        <td>
-            @foreach (var answer in Model.Answers)
-            {
-                @Html.Raw(answer.PossibleAnswer)
-                @if (answer.IsCorrect)
-                {
-                            <h6>(Correct Answer)</h6>
-                }
-                    
-            }
-        </td>
-    </tr>
+            
+    
+    </tbody>
 </table>
 
 <div>
