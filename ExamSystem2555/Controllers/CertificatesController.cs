@@ -134,6 +134,7 @@ namespace WebApp.Controllers
             if (certificate != null)
             {
                 await _service.CertificateService.DeleteCertificateAsync(id);
+
             }
 
             await _service.SaveChangesAsync();

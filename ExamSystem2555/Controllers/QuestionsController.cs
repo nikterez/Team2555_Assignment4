@@ -564,7 +564,6 @@ namespace WebApp.Controllers
 
         }
 
-        // GET: Questions/Delete/5
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -578,6 +577,8 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
+            await _service.QuestionService.DeleteQuestionAsync(id);
+            await _service.SaveChanges();
 
             return View(question);
         }
