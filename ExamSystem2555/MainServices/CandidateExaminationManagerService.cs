@@ -19,10 +19,9 @@ namespace WebApp.MainServices
         private readonly ICandidateExaminationService _candidateExamService;
         private readonly ICandidateExaminationResultsService _candidateExamResultsService;
         private readonly IMarkerAssignedExamService _markerAssignedExamService;
+        private readonly ICandidateService _candidateService;
 
-
-
-        public CandidateExaminationManagerService(ApplicationDbContext context, ICandidateExaminationResultsService candidateExamResultsService, ICandidateExaminationService candidateExamService , ICertificateTopicQuestionService certificateTopicQuestionService , IQuestionService questionService, IQuestionPossibleAnswerService answerService, ICandidateExaminationAnswerService candidateAnswerService, IExaminationQuestionService examQuestionService, IExaminationService examService, ITopicQuestionService topicQuestionService, IMarkerAssignedExamService markerAssignedExamService)
+        public CandidateExaminationManagerService(ApplicationDbContext context, ICandidateExaminationResultsService candidateExamResultsService, ICandidateExaminationService candidateExamService , ICertificateTopicQuestionService certificateTopicQuestionService , IQuestionService questionService, IQuestionPossibleAnswerService answerService, ICandidateExaminationAnswerService candidateAnswerService, IExaminationQuestionService examQuestionService, IExaminationService examService, ITopicQuestionService topicQuestionService, IMarkerAssignedExamService markerAssignedExamService, ICandidateService candidateService)
         {
             _context = context;
             _questionService = questionService;
@@ -35,6 +34,7 @@ namespace WebApp.MainServices
             _candidateExamService= candidateExamService;
             _candidateExamResultsService= candidateExamResultsService;
             _markerAssignedExamService= markerAssignedExamService;
+            _candidateService = candidateService;
         }
 
         public IQuestionService QuestionService { get { return _questionService; } }
@@ -47,6 +47,7 @@ namespace WebApp.MainServices
         public ICandidateExaminationService CandidateExamService { get { return _candidateExamService;} }
         public ICandidateExaminationResultsService CandidateExamResultsService { get { return _candidateExamResultsService; } }
         public IMarkerAssignedExamService MarkerAssignedExamService { get { return _markerAssignedExamService; } }
+        public ICandidateService CandidateService { get { return _candidateService; } }
 
 
         public async Task SaveChangesAsync()
@@ -99,10 +100,6 @@ namespace WebApp.MainServices
             }
         }
 
-        //public async Task CandidateExaminationLoad(CandidateExamination c)
-        //{
-        //    await _context.Entry(c).Reference(e=>e.Examination).LoadAsync();
-        //}
 
         public async Task CandidateResultsLoad(CandidateExamination c)
         {

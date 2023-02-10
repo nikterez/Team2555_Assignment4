@@ -15,6 +15,7 @@ namespace WebApp.MainServices.Interfaces
         public ICandidateExaminationService CandidateExamService { get; }
         public ICandidateExaminationResultsService CandidateExamResultsService { get; }
         public IMarkerAssignedExamService MarkerAssignedExamService { get; }
+        public ICandidateService CandidateService { get; }
         public Task CandidateAnswerExamLoad(IEnumerable<CandidateExaminationAnswer> examCandidateAnswers);
         Task CertificateTopicsLoad(CertificateTopicQuestion ctq);
         Task ExaminationQuestionLoad(IEnumerable<ExaminationQuestion> eq);

@@ -30,17 +30,25 @@ namespace WebApp.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> CandidateExaminationDetails(int? id)
+        public async Task<ActionResult> GetCandidateExaminationsForCandidate(int? id)
         {
-            var candidateExamination = await _service.CandidateExamService.GetCandidateExamByIdAsync(id);
-            await _service.CandidateExaminationLoad(candidateExamination);
+            var candidate = await _service.CandidateService.GetCandidateByIdAsync(id);
+            var candidateExaminations = (await _service.CandidateExamService.GetAllCandidateExamAsync()).Where(ce => ce.Candidate == candidate).ToList();
 
-            var model = _mapper.Map<CandidateExaminationsDTO>(candidateExamination);
+            foreach (var cExam in candidateExaminations)
+            {
+                await _service.CandidateExaminationLoad(cExam);
+
+            }
+
+            var completedExams = candidateExaminations.Where(ce=>ce.CandidateExamResults!=null).ToList();
+
+            var model = _mapper.Map<List<CandidateExaminationsDTO>>(completedExams);
 
             return View(model);
 
         }
-        
+
 
     }
 }
