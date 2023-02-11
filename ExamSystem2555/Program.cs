@@ -11,6 +11,7 @@ using WebApp.Models;
 using WebApp.MainServices.Interfaces;
 using WebApp.Services.Interfaces;
 using WebApp.Repositories.Interfaces;
+using Stripe;
 
 namespace WebApp
 {
@@ -92,6 +93,13 @@ namespace WebApp
 
 
 
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(option =>
+            {
+                option.IdleTimeout = TimeSpan.FromSeconds(20);
+                option.Cookie.HttpOnly = true;
+                option.Cookie.IsEssential = true;
+            });
 
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -114,6 +122,7 @@ namespace WebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseRouting();
 

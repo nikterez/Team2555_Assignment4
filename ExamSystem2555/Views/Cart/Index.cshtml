@@ -1,0 +1,70 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+
+
+<h1>Cart</h1>
+<div class="row">
+
+
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr>
+					
+					<th>
+						@Html.DisplayName("Title")
+					</th>
+					<th>
+						@Html.DisplayName("Price")
+					</th>
+
+
+					<th>
+						@Html.DisplayName("Quantity")
+					</th>
+					<th>
+						@Html.DisplayName("SubTotal")
+					</th>
+
+
+				</tr>
+			</thead>
+			<tbody id="myTable">
+				@foreach (var item in ViewBag.cart)
+				{
+					<tr>
+						<td>
+							@item.Certificate.Title
+						</td>
+						
+						<td>
+							@item.Certificate.Price
+						</td>
+						<td>
+							@item.Quantity
+						</td>
+						<td>
+							@(item.Certificate.Price * item.Quantity)
+						</td>
+					</tr>
+				}
+
+
+				<tr>
+					<td align ="right" colspan="4">
+						Sum
+						</td>
+						<td>
+							@ViewBag.total
+						</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+</div>
+<a asp-controller="GeneralHome" asp-action="Index" class="btn btn-sm btn-info">Continue Shoping</a>
+<a asp-controller="Checkout" asp-action="Index" class="btn btn-sm btn-outline-success">Checkout</a>
+
