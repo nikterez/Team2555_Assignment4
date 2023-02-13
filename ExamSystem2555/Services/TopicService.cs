@@ -1,16 +1,19 @@
 ﻿using MyDatabase.Models;
 using WebApp.Services.Interfaces;
 using WebApp.Repositories.Interfaces;
+using WebApp.Data;
 
 namespace WebApp.Services
 {
     public class TopicService : ITopicService
     {
         private IAsyncGenericRepository<Topic> _topicRepository;
+        private ApplicationDbContext _context;
 
-        public TopicService(IAsyncGenericRepository<Topic> topicRepository)
+        public TopicService(IAsyncGenericRepository<Topic> topicRepository, ApplicationDbContext context)
         {
             _topicRepository = topicRepository;
+            _context = context;
         }
 
         public async Task<Topic> GetTopicByIdAsync(int? id)
@@ -52,6 +55,10 @@ namespace WebApp.Services
         {
             var sortedTopics = (await GetAllTopicsAsync()).Where(ci => topicIds.Contains(ci.TopicId)).ToList();
             return sortedTopics;
+        }
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

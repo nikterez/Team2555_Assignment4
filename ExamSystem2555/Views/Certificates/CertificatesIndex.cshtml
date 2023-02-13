@@ -68,7 +68,7 @@
                     
                     @if(User.IsInRole("Administrator")){
 
-                
+                        
                         <a class="btn btn-outline-success" asp-action="EditCertificate" asp-route-id="@item.CertificateId">Edit</a>
                         <a class="btn btn-outline-danger" asp-action="DisableCertificate" asp-route-id="@item.CertificateId">Disable</a>
                     }

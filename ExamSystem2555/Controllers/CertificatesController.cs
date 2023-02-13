@@ -139,5 +139,13 @@ namespace WebApp.Controllers
         {
             return true;
         }
+
+        public async Task<IActionResult> AddCertificateTopics(int id)
+        {
+            await _service.TopicService.GetAllTopicsAsync();
+            var certificate = await _service.CertificateService.GetCertificateByIdAsync(id);
+            return View(certificate);
+
+        }
     }
 }

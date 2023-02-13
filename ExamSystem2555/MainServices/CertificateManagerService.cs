@@ -19,18 +19,29 @@ namespace WebApp.MainServices
         private readonly ICertificateService _certificateService;
         private readonly ICertificateTopicService _certificateTopicService;
         private readonly ICertificateLevelService _levelService;
+        private readonly ITopicService _topicService;
+        private readonly ITopicQuestionService _topicQuestionService;
+        private readonly IQuestionService _questionService;
 
-        public CertificateManagerService(ApplicationDbContext context, IMapper mapper, ICertificateService certificateService, ICertificateTopicService certificateTopicService, ICertificateLevelService levelService)
+        public CertificateManagerService(ApplicationDbContext context, IMapper mapper, ICertificateService certificateService, ICertificateTopicService certificateTopicService, ICertificateLevelService levelService, ITopicService topicService, ITopicQuestionService topicQuestionService, IQuestionService questionService)
         {
             _context = context;
             _mapper = mapper;
             _certificateService = certificateService;
             _certificateTopicService = certificateTopicService;
             _levelService = levelService;
+            _topicService = topicService;
+            _topicQuestionService = topicQuestionService;
+            _questionService = questionService;
         }
         public ICertificateService CertificateService { get => _certificateService; }
         public ICertificateTopicService CertificateTopicService { get => _certificateTopicService; }
         public ICertificateLevelService LevelService { get => _levelService; }
+        public ITopicService TopicService { get => _topicService; }
+        public ITopicQuestionService TopicQuestionService { get => _topicQuestionService; }
+        public IQuestionService QuestionService { get => _questionService; }
+
+
 
         public async Task LoadLevel(Certificate certificate)
         {

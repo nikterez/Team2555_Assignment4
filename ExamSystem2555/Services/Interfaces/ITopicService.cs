@@ -10,6 +10,7 @@ namespace WebApp.Services.Interfaces
         Task<Topic> UpdateTopicAsync(Topic entity);
         Task DeleteTopicAsync(int? id);
         Task<IEnumerable<Topic>> SortTopicsById(IEnumerable<int> topicIds);
+        Task SaveAsync();
 
         string CheckNull(Topic entity);
     }
